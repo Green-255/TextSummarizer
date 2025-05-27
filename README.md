@@ -2,7 +2,7 @@
 Tai žiniatinklio tipo įrankis, skirtas efektyviai generuoti glaustas santraukas anglų kalbos tekstams. Jis apjungia mašininio mokymosi modelius su patogia vartotojo sąsaja ir siūlo tiek ekstraktyvios, tiek abstraktyvios santraukos režimus.
 
 # Įrankio architektūros aprašymas (praktikos ataskaita)
-[Download Project Report (PDF)](Teksto santraukos įrankio architektūros aprašas.pdf)
+[Atsisiųsti programos architektūros aprašą (PDF)](Teksto_santraukos_įrankio_architektūros_aprašas.pdf)
 
 # Funkcijos
 * ✅ Pasirinkite santraukos tipą: ekstraktyvi (svarbiausių sakinių atranka) arba abstraktyvi (perfrazuota santrauka).
