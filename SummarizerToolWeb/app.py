@@ -2,7 +2,7 @@ from flask import Flask, session
 from controllers import main_controller, history_controller
 from markupsafe import escape
 import os
-from SummarizerToolWeb.db import db
+from db import db
 import uuid
 # from models import SummaryModel
 from models.SummaryModel import Summary

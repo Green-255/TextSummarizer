@@ -1,4 +1,4 @@
-from SummarizerToolWeb.db import db
+from db import db
 
 class Summary(db.Model):
     __tablename__ = 'Summary_History'

@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, session, Response, jsonify
 from services import DownloadFormat, ExtractiveSummary, AbstractiveSummary
-from SummarizerToolWeb.db import db
+from db import db
 from models.SummaryModel import Summary
 
 

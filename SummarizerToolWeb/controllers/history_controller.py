@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, session, Response
 from models.SummaryModel import Summary
 from services import DownloadFormat
-from SummarizerToolWeb.db import db
+from db import db
 
 bp = Blueprint('history', __name__)
 
