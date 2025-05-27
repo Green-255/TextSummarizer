@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Istorija</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='history.css') }}">
+</head>
+<body>
+  <!-- reuse your top‑nav -->
+  <nav class="top-nav">
+    <div class="nav-container">
+      <div class="nav-right">
+        <a href="{{ url_for('main.index') }}">Santraukos sudarymas</a>
+        <a href="{{ url_for('history.history') }}">Istorija</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="history-container">
+    <!-- Download all history button -->
+    <form action="{{ url_for('history.download_all') }}" method="post" class="download-all-form">
+      <button type="submit" class="download-all-btn">
+        Atsisiųsti visą istoriją&nbsp;<span class="download-icon">⬇️</span>
+      </button>
+    </form>
+
+    {% for s in Summary_History %}
+      <div class="history-card">
+        <div class="card-content">
+          <!-- Original text column -->
+          <div class="card-column">
+            <div class="card-header">Originalus tekstas</div>
+            <div class="card-box">{{ s.input_text }}</div>
+          </div>
+          <!-- Summary column -->
+          <div class="card-column">
+            <div class="card-header">Santrauka</div>
+            <div class="card-box">{{ s.summary_text }}</div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span>
+            Santraukos tipas: <strong>{{ s.summary_type }}</strong>
+          </span>
+          <form action="{{ url_for('history.download_item', item_id=s.id) }}" method="post">
+            <button type="submit" class="download-btn-small">⬇️</button>
+          </form>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</body>
+</html>

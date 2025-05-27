@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Santraukos sudarymas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+  </head>
+  <body>
+    <!-- Top Navigation Bar -->
+    <nav class="top-nav">
+      <div class="nav-container">
+        <div class="nav-right">
+          <a href="{{ url_for('main.index') }}">Santraukos sudarymas</a>
+          <a href="{{ url_for('history.history') }}">Istorija</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Toolbar for summary type + slider -->
+    <div class="toolbar">
+      <div class="toolbar-container">
+        <div class="summary-type">
+          <select name="summary_type" id="summary_type">
+            <option value="Abstractive" {% if summary_type == 'Abstractive' %}selected{% endif %}>Abstraktyvi</option>
+            <option value="Extractive" {% if summary_type == 'Extractive' %}selected{% endif %}>Ekstraktyvi</option>
+          </select>
+          <span class="custom-arrow">▼</span> 
+        </div>
+
+        <div class="slider-area">
+          <!-- <div class="slider-labels">
+            <span>10%</span>
+            <span>25%</span>
+            <span>35%</span>
+            <span>50%</span>
+          </div> -->
+          <div>
+            <span class="slider-left-label">Trumpas</span>
+            <input type="range" class="custom-range"
+                    name="slider_index" id="slider_index"
+                    min="0" max="3" value="{{ slider_index|default('0') }}" step="1">
+            <input type="hidden"
+                    name="slider_value" id="slider_value"
+                    value="{{ slider_value|default('10') }}">
+            <span class="slider-right-label">Ilgas</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content: Two columns side by side -->
+    <div class="main-content">
+      <div class="input-column">
+        <label for="input_text" class="input-label">Įrašykite tekstą, kurį norite sutrumpinti</label>
+        <textarea
+        id="input_text"
+        name="input_text"
+        placeholder="Įrašykite tekstą čia...">{{ input_text|default("", true) }}</textarea>
+        <div class="main-content-bottom">
+          <div class="word-count-text" id="word_count_text">Žodžiai: 0/300</div>
+          <form action="{{ url_for('main.request_summary') }}" method="post" id="main-button">
+            <button class="submit-btn" id="summarize-btn" type="submit">Sutrumpinti</button>
+            <input type="hidden" name="hiddenTextValue" id="hiddenTextValue">
+            <input type="hidden" name="hiddenSummaryType" id="hiddenSummaryType">
+            <input type="hidden" name="hiddenSliderValue" id="hiddenSliderValue">
+          </form>
+        </div>
+      </div>
+
+      <div class="summary-column">
+        <label for="summary-result" class="input-label">Santrauka</label>
+        <div class="summary-box" id="summary-result" >{{ result_text }}</div>
+        <div class="main-content-bottom">
+          <div class="word-count-summary" id="word_count_summary">Žodžiai: 0</div>
+          <form action="{{ url_for('main.download_summary')}}" method="post">
+            <button class="download-btn" type="submit">⬇️</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const sliderMap = { 0: 10, 1: 25, 2: 35, 3: 50 };
+      const sliderIndex = document.getElementById('slider_index');
+      const sliderValue = document.getElementById('slider_value');
+
+      sliderIndex.addEventListener('input', () => {
+        const index = sliderIndex.value;
+        const mappedValue = sliderMap[index];
+        sliderValue.value = mappedValue;
+      });
+
+      const mainButton = document.getElementById("main-button")
+      const input_text = document.getElementById('input_text');
+
+      mainButton.addEventListener('submit', function() {
+        document.getElementById('hiddenSummaryType').value = document.getElementById('summary_type').value;
+        document.getElementById('hiddenSliderValue').value = document.getElementById('slider_value').value;
+        document.getElementById('hiddenTextValue').value = input_text.value
+      });
+
+      const wordCountText = document.getElementById('word_count_text')
+      
+      input_text.oninput = () => {
+        updateInputWordCount();
+      };
+      
+      function updateInputWordCount() {
+        let words = input_text.value.split(/\s+/).filter(word => word.trim() !== '');
+        if (words.length > 300) {
+          input_text.value = words.slice(0, 300).join(" ");
+          words = input_text.value.split(/\s+/).filter(word => word.trim() !== '');
+        }
+        wordCountText.textContent = "Žodžiai: " + words.length + "/300";
+      }
+      
+      function updateSummaryWordCount() {
+        const summary_text = document.getElementById('summary-result')
+        const wordCountSummary = document.getElementById('word_count_summary')
+
+        const text = summary_text.textContent;
+        const wordCount = text.split(' ').filter(item => item !== '').length;
+        wordCountSummary.textContent = "Žodžiai: " + wordCount;
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        updateInputWordCount();
+        updateSummaryWordCount();
+      });
+
+    </script>
+  </body>
+</html>

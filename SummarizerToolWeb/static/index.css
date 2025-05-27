@@ -1,0 +1,259 @@
+:root {
+  --accent-color: #FDD06F;
+  --accent-secondary-color: #D8E7EA;
+  --background-color: #F3E0BC;
+  --black-color: #000;
+}
+
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Global styles */
+body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background-color: var(--background-color);
+  color: #333;
+  line-height: 1.4;
+}
+
+/* ------------------------------ */
+/* NAVIGATION (Top Section)      */
+/* ------------------------------ */
+.top-nav {
+  background-color: var(--accent-secondary-color);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 60px;
+}
+
+.nav-right a {
+  text-decoration: none;
+  color: var(--black-color);
+  font-weight: 600;
+  font-size: 1em;
+  margin-left: 20px;
+}
+
+.nav-right a:hover {
+  color: var(--accent-color);
+}
+
+
+/* ------------------------------ */
+/*      PARAMETERS SECTION       */
+/* ------------------------------ */
+
+.toolbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px 0px 0px 0px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.summary-type {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.summary-type select {
+  appearance: none;
+  border: 1px solid #ccc;
+  border-radius: 9px;
+  padding: 8px 30px 8px 10px;
+  font-size: 1em;
+  background-color: var(--accent-secondary-color);
+  cursor: pointer;
+}
+
+/* The arrow (▼) next to the select */
+.summary-type .custom-arrow {
+  position: absolute;
+  right: 10px;
+  pointer-events: none;
+  font-size: 0.8em;
+  color: var(--accent-color);
+}
+
+.slider-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.slider-labels {
+  font-size: 0.82em;
+  font-weight: 500;
+  padding-left: 37px;
+  color: var(--black-color);
+}
+
+.slider-area input[type="range"] {
+  width: 150px;
+  cursor: pointer;
+}
+
+/* ========================== */
+/* 1) Range Track and Thumb   */
+/* ========================== */
+.custom-range {
+  -webkit-appearance: none; /* Remove default styling in Chrome/Safari */
+  width: 200px;
+  height: 6px;  
+  background: var(--accent-secondary-color);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+  margin: 0px 8px 0px 8px;
+}
+
+/* For WebKit Browsers (Chrome, Safari, etc.) */
+.custom-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 24px;              /* Size of the circle */
+  height: 24px;
+  background-color: #FDD06F; /* Your yellow accent color */
+  border-radius: 50%;
+  /* border: 2px solid #fff;  */
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3); /* Slight shadow */
+  cursor: pointer;
+  /* margin-top: -10px; */
+}
+
+
+.main-content {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  margin: 30px auto;
+  min-width: 50;
+  width: auto;
+  max-width: 1200px;
+  gap: 20px;
+}
+
+
+.input-column {
+  flex: 1;
+  background-color: var(--accent-secondary-color); 
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+
+.input-label {
+  font-weight: 600;
+  font-size: 1em;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+
+#input_text {
+  width: 100%;
+  min-height: 320px;
+  resize: vertical;
+  border: 1px solid #ccc;
+  background-color: var(--accent-secondary-color);
+  border-radius: 4px;
+  padding: 10px;
+  font-size: 0.95em;
+  margin-top: 5px;
+}
+
+
+.submit-btn {
+  display: inline-block;
+  width: 117px;
+  height: 42px;
+  background-color: var(--accent-color);
+  border: none;
+  border-radius: 7px;
+  font-size: 1em;
+  font-weight: 600;
+  text-align: center;
+  color: var(--black-color);
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.submit-btn:hover {
+  background-color: var(--background-color);
+}
+
+.download-btn {
+  display: inline-block;
+  width: 117px;
+  height: 42px;
+  background-color: var(--accent-color);
+  border: none;
+  border-radius: 7px;
+  font-size: 1em;
+  font-weight: 600;
+  text-align: center;
+  color: var(--black-color);
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.download-btn:hover {
+  background-color: var(--background-color);
+}
+
+
+.word-count-text {
+  margin-top: -15px;
+  vertical-align: top;
+  font-size: 0.9em;
+  color: var(--black-color);
+}
+
+.summary-column {
+  flex: 1;
+  background-color: var(--accent-secondary-color); 
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.main-content-bottom {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 14.5px;
+}
+
+
+.word-count-summary {
+  vertical-align: top;
+  text-align: left;
+  font-size: 0.9em;
+  color: var(--black-color);
+  margin-top: -10px;
+}
+
+
+.summary-box {
+  margin-top: 5px;
+  padding: 10px;
+  width: 100%;
+  min-height: 320px;
+  font-size: 0.95em;
+  color: #333;
+  background-color: var(--accent-secondary-color);
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
